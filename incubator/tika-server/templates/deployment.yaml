@@ -3,7 +3,10 @@ kind: Deployment
 metadata:
   name: {{ template "fullname" . }}
   labels:
+    app: {{ template "fullname" . }}
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
 spec:
   replicas: {{ .Values.replicaCount }}
   template:
@@ -12,9 +15,14 @@ spec:
         app: {{ template "fullname" . }}
     spec:
       containers:
-      - name: {{ .Chart.Name }}
+      - name: {{ template "fullname" . }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
+        env:
+        - name: TIKA_VERSION
+        value: {{ .Values.tika.version }}
+        - name: TIKA_TRANSLATOR
+        value: {{ .Values.tika.translator}}
         ports:
         - containerPort: {{ .Values.service.internalPort }}
         livenessProbe:
@@ -31,6 +39,6 @@ spec:
             port: {{ .Values.service.internalPort }}
           initialDelaySeconds: 10
           periodSeconds: 5
-          timeoutSeconds: 5
+          timeoutSeconds: 1
         resources:
-{{ toYaml .Values.resources | indent 12 }}
+{{ toYaml .Values.resources | indent 10 }}

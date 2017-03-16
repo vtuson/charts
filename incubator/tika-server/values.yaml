@@ -6,6 +6,9 @@ image:
   repository: bitnami/tika-server
   tag: 1.14
   pullPolicy: IfNotPresent
+tika:
+  version: 1.14
+  translator: google
 service:
   name: tika
   type: ClusterIP

@@ -1,4 +1,12 @@
-apiVersion: v1
-description: A Apache Tika Server Helm chart for Kubernetes
 name: tika-server
 version: 0.1.0
+description: A Apache Tika Server Helm chart for Kubernetes
+keywords:
+- tika
+- translation
+home: https://tika.apache.org/
+icon: http://tika.apache.org/tika.png
+maintainers:
+- name: Bitnami
+  email: containers@bitnami.com
+engine: gotpl
