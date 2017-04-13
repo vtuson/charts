@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: mysql
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        io.kompose.service: mysql
+    spec:
+      containers:
+      - env:
+        - name: MYSQL_DATABASE
+          value: huginn
+        - name: MYSQL_PASSWORD
+          value: lBWiqGVljwEc
+        - name: MYSQL_ROOT_PASSWORD
+          value: WX6VTdvvmPEg
+        - name: MYSQL_USER
+          value: Usk2t0HE
+        image: mysql:5.7
+        name: mysql
+        ports:
+        - containerPort: 3306
+      restartPolicy: Always

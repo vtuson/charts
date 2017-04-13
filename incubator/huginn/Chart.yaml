@@ -1,0 +1,10 @@
+name: huginn
+version: 0.1.11
+description: Huginn is a system for building agents that perform automated tasks for you online. They can read the web, watch for events, and take actions on your behalf. Huginn's Agents create and consume events, propagating them along a directed graph
+keywords:
+- huginn
+home: https://github.com/cantino/huginn
+maintainers:
+- name: Bitnami
+  email: containers@bitnami.com
+engine: gotpl

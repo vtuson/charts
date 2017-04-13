@@ -1,0 +1,32 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: huginn-web
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        io.kompose.service: huginn-web
+    spec:
+      containers:
+      - env:
+        - name: DATABASE_USERNAME
+          value: Usk2t0HE
+        - name: MYSQL_PORT_3306_TCP_ADDR
+          value: mysql
+        - name: MYSQL_PORT_3306_TCP_PORT
+          value: "3306"
+        - name: APP_SECRET_TOKEN
+          value: IiEVPU9dVY0mWxZY1d173NtoVkzvjjpY+8XrjwtZlkg4mazvFMNadMcXtZ8ODSMScpwnuxK07D23LmLGC92fINl0keOpPCvfy2vv73EMmSLbVZCBJg0jbUOH5FQQl11fK8vp2DBVfdcEsIpasn/Pogh2NJNBJ5mQ0U9F4uI8b9m0
+        - name: DATABASE_ADAPTER
+          value: mysql2
+        - name: DATABASE_NAME
+          value: huginn
+        - name: DATABASE_PASSWORD
+          value: lBWiqGVljwEc
+        image: cantino/huginn-single-process
+        name: huginn-web
+        ports:
+        - containerPort: 3000
+      restartPolicy: Always
