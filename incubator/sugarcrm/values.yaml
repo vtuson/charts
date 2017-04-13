@@ -1,36 +1,51 @@
-## Bitnami Moodle` image version
-## ref: https://hub.docker.com/r/bitnami/moodle/tags/
+## Bitnami SugarCRM image version
+## ref: https://hub.docker.com/r/bitnami/sugarcrm/tags/
 ##
-image: bitnami/moodle:3.2.1-r3
+image: bitnami/sugarcrm:6.5.25-r0
 
 ## Specify a imagePullPolicy
-## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
 ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
 ##
 imagePullPolicy: IfNotPresent
 
-## User of the application
-## ref: https://github.com/bitnami/bitnami-docker-moodle#configuration
+## SugarCRM host to create application URLs
+## ref: https://github.com/bitnami/bitnami-docker-sugarcrm#configuration
 ##
-moodleUsername: user
+# sugarcrmHost:
+
+## loadBalancerIP for the SugarCRM Service (optional, cloud specific)
+## ref: http://kubernetes.io/docs/user-guide/services/#type-loadbalancer
+##
+# sugarcrmLoadBalancerIP:
+
+## User of the application
+## ref: https://github.com/bitnami/bitnami-docker-sugarcrm#configuration
+##
+sugarcrmUsername: user
 
 ## Application password
 ## Defaults to a random 10-character alphanumeric string if not set
-## ref: https://github.com/bitnami/bitnami-docker-moodle#configuration
+## ref: https://github.com/bitnami/bitnami-docker-sugarcrm#configuration
 ##
-# moodlePassword:
+# sugarcrmPassword:
 
 ## Admin email
-## ref: https://github.com/bitnami/bitnami-docker-moodle#configuration
-moodleEmail: user@example.com
+## ref: https://github.com/bitnami/bitnami-docker-sugarcrm#configuration
+##
+sugarcrmEmail: user@example.com
+
+## Last Name
+## ref: https://github.com/bitnami/bitnami-docker-sugarcrm#configuration
+##
+sugarcrmLastName: LastName
 
 ## SMTP mail delivery configuration
-## ref: https://github.com/bitnami/bitnami-docker-moodle/#smtp-configuration
-# smtpHost:
-# smtpPort:
-# smtpUser:
-# smtpPassword:
-# smtpProtocol:
+## ref: https://github.com/bitnami/bitnami-docker-orangehrm/#smtp-configuration
+# sugarcrmSmtpHost:
+# sugarcrmSmtpPort:
+# sugarcrmSmtpUser:
+# sugarcrmSmtpPassword:
+# sugarcrmSmtpProtocol:
 
 ##
 ## MariaDB chart configuration
@@ -49,7 +64,7 @@ mariadb:
     ## If defined, volume.beta.kubernetes.io/storage-class: <storageClass>
     ## Default: volume.alpha.kubernetes.io/storage-class: default
     ##
-    # storageClass: generic
+    # storageClass:
     accessMode: ReadWriteOnce
     size: 8Gi
 
@@ -67,14 +82,14 @@ persistence:
     ## If defined, volume.beta.kubernetes.io/storage-class: <storageClass>
     ## Default: volume.alpha.kubernetes.io/storage-class: default
     ##
-    # storageClass: generic
+    # storageClass:
     accessMode: ReadWriteOnce
     size: 1Gi
-  moodle:
+  sugarcrm:
     ## If defined, volume.beta.kubernetes.io/storage-class: <storageClass>
     ## Default: volume.alpha.kubernetes.io/storage-class: default
     ##
-    # storageClass: generic
+    # storageClass:
     accessMode: ReadWriteOnce
     size: 8Gi
 
