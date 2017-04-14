@@ -16,10 +16,15 @@ spec:
         component: {{ template "fullname" . }}-mysql
     spec:
       containers:
-      - name: mysql-huginn
-        image: mysql:5.7
+      - name: {{ template "fullname" . }}-mysql
+        image: bitnami/mysql:5
         imagePullPolicy: {{ default "" .Values.imagePullPolicy | quote }}
         env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "fullname" . }}
+              key: mysql-root-password
         - name: MYSQL_DATABASE
           value: "huginn"
         - name: MYSQL_PASSWORD
@@ -27,8 +32,6 @@ spec:
             secretKeyRef:
               name: {{ template "fullname" . }}
               key: database-password
-        - name: MYSQL_ROOT_PASSWORD
-          value: WX6VTdvvmPEg
         - name: MYSQL_USER
           value: {{ default "huginn" .Values.databaseUser| quote }}
         ports:

@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: {{ template "fullname" . }}
+  name: {{ template "fullname" . }}-threaded
   labels:
     app: {{ template "fullname" . }}
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
@@ -12,8 +12,7 @@ spec:
   template:
     metadata:
       labels:
-        app: {{ template "fullname" . }}
-        component: {{ template "fullname" . }}-threaded
+        app: {{ template "fullname" . }}-threaded
     spec:
       containers:
       - name: {{ template "fullname" . }}
@@ -24,7 +23,7 @@ spec:
         - bin/threaded.rb
         env:
         - name: MYSQL_PORT_3306_TCP_ADDR
-          value: "mysql-huginn"
+          value: {{ template "fullname" . }}-mysql
         - name: MYSQL_PORT_3306_TCP_PORT
           value: "3306"
         - name: APP_SECRET_TOKEN
@@ -43,5 +42,14 @@ spec:
           value: "mysql2"
         - name: DATABASE_NAME
           value: "huginn"
+        readinessProbe:
+          exec:
+            command:
+            - /app/bin/bundle 
+            - exec 
+            - rake
+            - db:version
+          initialDelaySeconds: 180
+          timeoutSeconds: 5
         resources:
 {{ toYaml .Values.resources | indent 10 }}

@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: mysql-huginn
+  name: {{ template "fullname" . }}-mysql
   labels:
-    app: mysql-huginn
+    app: {{ template "fullname" . }}
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     release: "{{ .Release.Name }}"
     heritage: "{{ .Release.Service }}"
@@ -13,4 +13,4 @@ spec:
     port: 3306
     targetPort: 3306
   selector:
-    app: mysql-huginn
+    app: {{ template "fullname" . }}
