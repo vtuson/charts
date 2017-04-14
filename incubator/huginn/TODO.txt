@@ -1,0 +1,7 @@
+Currently this chart lacks of: 
+
+- Migrate from mysql container to a mariadb helm chart
+- A K8s job that make database backups and store it.  Take a look at minio as a object store.
+- Database persistence:  TBD support for MariaDB Helm chart
+- Wondering to make a demo integrataion with Kubeless
+
