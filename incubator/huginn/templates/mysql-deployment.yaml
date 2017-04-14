@@ -1,26 +1,35 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: mysql
+  name: {{ template "fullname" . }}-mysql
+  labels:
+    app: {{ template "fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        io.kompose.service: mysql
+        app: {{ template "fullname" . }}
+        component: {{ template "fullname" . }}-mysql
     spec:
       containers:
-      - env:
+      - name: mysql-huginn
+        image: mysql:5.7
+        imagePullPolicy: {{ default "" .Values.imagePullPolicy | quote }}
+        env:
         - name: MYSQL_DATABASE
-          value: huginn
+          value: "huginn"
         - name: MYSQL_PASSWORD
-          value: lBWiqGVljwEc
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "fullname" . }}
+              key: database-password
         - name: MYSQL_ROOT_PASSWORD
           value: WX6VTdvvmPEg
         - name: MYSQL_USER
-          value: Usk2t0HE
-        image: mysql:5.7
-        name: mysql
+          value: {{ default "huginn" .Values.databaseUser| quote }}
         ports:
         - containerPort: 3306
-      restartPolicy: Always

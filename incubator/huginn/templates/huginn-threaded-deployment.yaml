@@ -1,33 +1,46 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: huginn-threaded
+  name: {{ template "fullname" . }}
+  labels:
+    app: {{ template "fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        io.kompose.service: huginn-threaded
+        app: {{ template "fullname" . }}
+        component: {{ template "fullname" . }}-threaded
     spec:
       containers:
-      - args:
+      - name: {{ template "fullname" . }}
+        image: cantino/huginn-single-process
+        imagePullPolicy: {{ default "" .Values.imagePullPolicy | quote }}
+        args:
         - /scripts/init
         - bin/threaded.rb
         env:
-        - name: DATABASE_PASSWORD
-          value: lBWiqGVljwEc
-        - name: DATABASE_USERNAME
-          value: Usk2t0HE
         - name: MYSQL_PORT_3306_TCP_ADDR
-          value: mysql
+          value: "mysql-huginn"
         - name: MYSQL_PORT_3306_TCP_PORT
           value: "3306"
         - name: APP_SECRET_TOKEN
-          value: IiEVPU9dVY0mWxZY1d173NtoVkzvjjpY+8XrjwtZlkg4mazvFMNadMcXtZ8ODSMScpwnuxK07D23LmLGC92fINl0keOpPCvfy2vv73EMmSLbVZCBJg0jbUOH5FQQl11fK8vp2DBVfdcEsIpasn/Pogh2NJNBJ5mQ0U9F4uI8b9m0
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "fullname" . }}
+              key: app-secret-token
+        - name: DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "fullname" . }}
+              key: database-password 
+        - name: DATABASE_USERNAME
+          value: {{ default "huginn" .Values.databaseUser| quote }}
         - name: DATABASE_ADAPTER
-          value: mysql2
+          value: "mysql2"
         - name: DATABASE_NAME
-          value: huginn
-        image: cantino/huginn-single-process
-        name: huginn-threaded
-      restartPolicy: Always
+          value: "huginn"
+{{ toYaml .Values.resources | indent 10 }}
