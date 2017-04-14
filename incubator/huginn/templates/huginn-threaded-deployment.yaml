@@ -43,4 +43,5 @@ spec:
           value: "mysql2"
         - name: DATABASE_NAME
           value: "huginn"
+        resources:
 {{ toYaml .Values.resources | indent 10 }}
