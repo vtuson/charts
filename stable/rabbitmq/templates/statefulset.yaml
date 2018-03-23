@@ -97,13 +97,21 @@ spec:
           - name: RABBITMQ_NODENAME
             value: "rabbit@$(MY_POD_IP)"
           - name: K8S_SERVICE_NAME
-            value: {{ template "rabbitmq.fullname" . | quote }}
+            value: "{{ template "rabbitmq.fullname" . }}"
           - name: RABBITMQ_ERL_COOKIE
             valueFrom:
               secretKeyRef:
                 name: {{ template "rabbitmq.fullname" . }}
                 key: rabbitmq-erlang-cookie 
       volumes:
+        - name: config-volume
+          configMap: 
+            name: {{ template "rabbitmq.fullname" . }}-config
+            items:
+            - key: rabbitmq.conf
+              path: rabbitmq.conf
+            - key: enabled_plugins
+              path: enabled_plugins
         - name: data
         {{- if .Values.persistence.enabled }}
           persistentVolumeClaim:
@@ -111,11 +119,4 @@ spec:
         {{- else }}
           emptyDir: {}
         {{- end -}}
-        - name: config-volume
-          configMap: 
-            name: "{{ template "rabbitmq.fullname" . }}-config"
-            items:
-            - key: rabbitmq.conf
-              path: rabbitmq.conf
-            - key: enabled_plugins
-              path: enabled_plugins
+       
