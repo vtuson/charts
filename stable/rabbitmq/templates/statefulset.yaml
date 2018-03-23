@@ -59,7 +59,7 @@ spec:
             exec rabbitmq-server
         volumeMounts:
           - name: config-volume
-            mountPath: /opt/bitnami/rabbit/conf
+            mountPath: /opt/bitnami/rabbitmq/conf
           - name: data
             mountPath: /bitnami/rabbitmq
         ports:
