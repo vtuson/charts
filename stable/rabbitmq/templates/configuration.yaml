@@ -20,6 +20,6 @@ data:
       loopback_users.guest = false
 
       ##username and password
-      default_user={{.Values.rabbitmqUsername}}
+      default_user={{.Values.rabbitmq.username}}
       default_pass=CHANGEME
    

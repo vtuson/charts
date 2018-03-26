@@ -66,11 +66,11 @@ spec:
         - name: epmd
           containerPort: 4369
         - name: amqp
-          containerPort: {{ default "5672" .Values.rabbitmqNodePort }}
+          containerPort: {{ default "5672" .Values.rabbitmq.nodePort }}
         - name: dist
-          containerPort: {{ default "5672" .Values.rabbitmqNodePort | add 20000 }}
+          containerPort: {{ default "5672" .Values.rabbitmq.nodePort | add 20000 }}
         - name: stats
-          containerPort: {{ default "15672" .Values.rabbitmqManagerPort }}
+          containerPort: {{ default "15672" .Values.rabbitmq.managerPort }}
         livenessProbe:
           exec:
             command:

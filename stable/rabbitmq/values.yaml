@@ -3,62 +3,48 @@
 ##
 image: bitnami/rabbitmq:3.7.4-r1
 
-## Specify a imagePullPolicy
-## 'Always' if imageTag is 'latest', else set to 'IfNotPresent'
-## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
-##
-# imagePullPolicy:
+rabbit:
+  ## Specify a imagePullPolicy
+  ## 'Always' if imageTag is 'latest', else set to 'IfNotPresent'
+  ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
+  ##
+  # imagePullPolicy:
 
-## RabbitMQ application username
-## ref: https://github.com/bitnami/bitnami-docker-rabbitmq/blob/master/README.md#creating-a-database-user-on-first-run
-##
-rabbitmqUsername: user
+  ## RabbitMQ application username
+  ## ref: https://github.com/bitnami/bitnami-docker-rabbitmq/blob/master/README.md#creating-a-database-user-on-first-run
+  ##
+  username: user
 
-## RabbitMQ application password
-## ref: https://github.com/bitnami/bitnami-docker-rabbitmq/blob/master/README.md#creating-a-database-user-on-first-run
-##
-# rabbitmqPassword:
+  ## RabbitMQ application password
+  ## ref: https://github.com/bitnami/bitnami-docker-rabbitmq/blob/master/README.md#creating-a-database-user-on-first-run
+  ##
+  # password:
 
-## Erlang cookie to determine whether different nodes are allowed to communicate with each other
-## ref: https://github.com/bitnami/bitnami-docker-rabbitmq#environment-variables
-##
-# rabbitmqErlangCookie:
+  ## Erlang cookie to determine whether different nodes are allowed to communicate with each other
+  ## ref: https://github.com/bitnami/bitnami-docker-rabbitmq#environment-variables
+  ##
+  # erlangCookie:
 
-## Node port
-## ref: https://github.com/bitnami/bitnami-docker-rabbitmq#environment-variables
-##
-rabbitmqNodePort: 5672
+  ## Node port
+  ## ref: https://github.com/bitnami/bitnami-docker-rabbitmq#environment-variables
+  ##
+  nodePort: 5672
 
-## Node Type
-## ref: https://github.com/bitnami/bitnami-docker-rabbitmq#environment-variables
-##
-rabbitmqNodeType: stats
+  ## Node name to cluster with. e.g.: `clusternode@hostname`
+  ## ref: https://github.com/bitnami/bitnami-docker-rabbitmq#environment-variables
+  ##
+  # rabbitmqClusterNodeName:
 
-## Node Name
-## ref: https://github.com/bitnami/bitnami-docker-rabbitmq#environment-variables
-##
-rabbitmqNodeName: rabbit
+  ## RabbitMQ Manager port
+  ## ref: https://github.com/bitnami/bitnami-docker-rabbitmq#environment-variables
+  ##
+  managerPort: 15672
 
-## Node name to cluster with. e.g.: `clusternode@hostname`
-## ref: https://github.com/bitnami/bitnami-docker-rabbitmq#environment-variables
-##
-# rabbitmqClusterNodeName:
-
-## RabbitMQ application vhost
-## ref: https://github.com/bitnami/bitnami-docker-rabbitmq#environment-variables
-##
-rabbitmqVhost: /
-
-## RabbitMQ Manager port
-## ref: https://github.com/bitnami/bitnami-docker-rabbitmq#environment-variables
-##
-rabbitmqManagerPort: 15672
-
-## RabbitMQ Disk free limit
-## ref: https://github.com/bitnami/bitnami-docker-rabbitmq#environment-variables
-## ref: https://www.rabbitmq.com/disk-alarms.html
-##
-rabbitmqDiskFreeLimit: '"6GiB"'
+  ## RabbitMQ Disk free limit
+  ## ref: https://github.com/bitnami/bitnami-docker-rabbitmq#environment-variables
+  ## ref: https://www.rabbitmq.com/disk-alarms.html
+  ##
+  diskFreeLimit: '"6GiB"'
 
 ## Kubernetes service type
 serviceType: ClusterIP
@@ -81,7 +67,7 @@ persistence:
   # storageClass: "-"
   accessMode: ReadWriteOnce
 
-  # If you change this value, you might have to adjust `rabbitmqDiskFreeLimit` as well.
+  # If you change this value, you might have to adjust `rabbitmq.diskFreeLimit` as well.
   size: 8Gi
 
 ## Configure resource requests and limits

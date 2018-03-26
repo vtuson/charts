@@ -47,16 +47,12 @@ The following tables lists the configurable parameters of the RabbitMQ chart and
 |-----------------------------|---------------------------------------------------------|----------------------------------------------------------|
 | `image`                     | RabbitMQ image                                          | `bitnami/rabbitmq:{VERSION}`                             |
 | `imagePullPolicy`           | Image pull policy                                       | `Always` if `imageTag` is `latest`, else `IfNotPresent`. |
-| `rabbitmqUsername`          | RabbitMQ application username                           | `user`                                                   |
-| `rabbitmqPassword`          | RabbitMQ application password                           | _random 10 character long alphanumeric string_           |
-| `rabbitmqErlangCookie`      | Erlang cookie                                           | _random 32 character long alphanumeric string_           |
-| `rabbitmqNodePort`          | Node port                                               | `5672`                                                   |
-| `rabbitmqNodeType`          | Node type                                               | `stats`                                                  |
-| `rabbitmqNodeName`          | Node name                                               | `rabbit`                                                 |
-| `rabbitmqClusterNodeName`   | Node name to cluster with. e.g.: `clusternode@hostname` | `nil`                                                    |
-| `rabbitmqVhost`             | RabbitMQ application vhost                              | `/`                                                      |
-| `rabbitmqManagerPort`       | RabbitMQ Manager port                                   | `15672`                                                  |
-| `rabbitmqDiskFreeLimit`     | Disk free limit                                         | `"6GiB"`                                                 |
+| `rabbitmq.username`          | RabbitMQ application username                           | `user`                                                   |
+| `rabbitmq.password`          | RabbitMQ application password                           | _random 10 character long alphanumeric string_           |
+| `rabbitmq.erlangCookie`      | Erlang cookie                                           | _random 32 character long alphanumeric string_           |
+| `rabbitmq.nodePort`          | Node port                                               | `5672`                                                   |
+| `rabbitmq.managerPort`       | RabbitMQ Manager port                                   | `15672`                                                  |
+| `rabbitmq.diskFreeLimit`     | Disk free limit                                         | `"6GiB"`                                                 |
 | `serviceType`               | Kubernetes Service type                                 | `ClusterIP`                                              |
 | `persistence.enabled`       | Use a PVC to persist data                               | `true`                                                   |
 | `persistence.existingClaim` | Use an existing PVC to persist data                     | `nil`                                                    |
@@ -73,7 +69,7 @@ Specify each parameter using the `--set key=value[,key=value]` argument to `helm
 
 ```bash
 $ helm install --name my-release \
-  --set rabbitmqUsername=admin,rabbitmqPassword=secretpassword,rabbitmqErlangCookie=secretcookie \
+  --set rabbitmq.username=admin,rabbitmq.password=secretpassword,rabbitmq.erlangCookie=secretcookie \
     stable/rabbitmq
 ```
 
