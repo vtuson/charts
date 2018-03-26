@@ -42,8 +42,7 @@
 
 {{- else if contains "ClusterIP"  .Values.serviceType }}
 
-    export POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app={{ template "rabbitmq.fullname" . }}" -o jsonpath="{.items[0].metadata.name}")
-    kubectl port-forward $POD_NAME {{ .Values.rabbitmqNodePort }}:{{ .Values.rabbitmqNodePort }} {{ .Values.rabbitmqManagerPort }}:{{ .Values.rabbitmqManagerPort }}
+   kubectl port-forward {{ template "rabbitmq.fullname" . }}-0  --namespace {{ .Release.Namespace }} {{ .Values.rabbitmqNodePort }}:{{ .Values.rabbitmqNodePort }} {{ .Values.rabbitmqManagerPort }}:{{ .Values.rabbitmqManagerPort }}
 
   To Access the RabbitMQ AMQP port:
 
