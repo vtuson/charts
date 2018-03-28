@@ -45,26 +45,35 @@ The following tables lists the configurable parameters of the RabbitMQ chart and
 
 |          Parameter          |                       Description                       |                         Default                          |
 |-----------------------------|---------------------------------------------------------|----------------------------------------------------------|
-| `image.registry`                     | Rabbitmq Image registry                   | `docker.io`                                                |
-| `image.repository`                   | Rabbitmq Image name                       | `bitnami/rabbitmq`                                        |
-| `image.tag`                          | Rabbitmq Image tag                        | `{VERSION}`                                                |
-| `image.pullPolicy`                   | Image pull policy                          | `Always` if `imageTag` is `latest`, else `IfNotPresent`    |
-| `image.pullSecrets`                  | Specify image pull secrets                 | `nil`                                                      |
-| `rabbitmq.username`          | RabbitMQ application username                           | `user`                                                   |
-| `rabbitmq.password`          | RabbitMQ application password                           | _random 10 character long alphanumeric string_           |
-| `rabbitmq.erlangCookie`      | Erlang cookie                                           | _random 32 character long alphanumeric string_           |
-| `rabbitmq.nodePort`          | Node port                                               | `5672`                                                   |
-| `rabbitmq.managerPort`       | RabbitMQ Manager port                                   | `15672`                                                  |
-| `rabbitmq.diskFreeLimit`     | Disk free limit                                         | `"6GiB"`                                                 |
+| `image.registry`            | Rabbitmq Image registry                                 | `docker.io`                                              |
+| `image.repository`          | Rabbitmq Image name                                     | `bitnami/rabbitmq`                                       |
+| `image.tag`                 | Rabbitmq Image tag                                      | `{VERSION}`                                              |
+| `image.pullPolicy`          | Image pull policy                                       | `Always` if `imageTag` is `latest`, else `IfNotPresent`  |
+| `image.pullSecrets`         | Specify docker-ragistry secret names as an array        | `nil`                                                    |
+| `image.debug`               | Specify if debug values should be set                   | `false`                                                  |
+| `rbacEnabled`               | Specify if rbac is enabled in your cluster              | `false`                                                  |
+| `rabbitmq.username`         | RabbitMQ application username                           | `user`                                                   |
+| `rabbitmq.password`         | RabbitMQ application password                           | _random 10 character long alphanumeric string_           |
+| `rabbitmq.erlangCookie`     | Erlang cookie                                           | _random 32 character long alphanumeric string_           |
+| `rabbitmq.nodePort`         | Node port                                               | `5672`                                                   |
+| `rabbitmq.managerPort`      | RabbitMQ Manager port                                   | `15672`                                                  |
+| `rabbitmq.diskFreeLimit`    | Disk free limit                                         | `"6GiB"`                                                 |
 | `serviceType`               | Kubernetes Service type                                 | `ClusterIP`                                              |
 | `persistence.enabled`       | Use a PVC to persist data                               | `true`                                                   |
 | `persistence.existingClaim` | Use an existing PVC to persist data                     | `nil`                                                    |
 | `persistence.storageClass`  | Storage class of backing PVC                            | `nil` (uses alpha storage class annotation)              |
 | `persistence.accessMode`    | Use volume as ReadOnly or ReadWrite                     | `ReadWriteOnce`                                          |
 | `persistence.size`          | Size of data volume                                     | `8Gi`                                                    |
+| `resources                  | resource needs and limits to apply to the pod           | {}                                                       |
 | `nodeSelector`              | Node labels for pod assignment                          | {}                                                       |
 | `affinity`                  | Affinity settings for pod assignment                    | {}                                                       |
 | `tolerations`               | Toleration labels for pod assignment                    | []                                                       |
+| `ingress.enabled`           | enable ingress for management console                   | `false`                                                  |
+| `ingress.tls`               | enable ingress with tls                                 | `false`                                                  |
+| `ingress.tlsSecret`         | tls type secret to be used                              | `myTlsSecret`                                            |
+| `ingress.annotations`       | ingress annotations as an array                         |  []                                                      |
+
+
 
 The above parameters map to the env variables defined in [bitnami/rabbitmq](http://github.com/bitnami/bitnami-docker-rabbitmq). For more information please refer to the [bitnami/rabbitmq](http://github.com/bitnami/bitnami-docker-rabbitmq) image documentation.
 
