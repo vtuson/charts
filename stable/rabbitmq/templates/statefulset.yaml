@@ -18,7 +18,9 @@ spec:
       labels:
         app: {{ template "rabbitmq.fullname" . }}
     spec:
+      {{- if .Values.rbacEnabled}}
       serviceAccountName: {{ template "rabbitmq.fullname" . }} 
+      {{- end }}
       terminationGracePeriodSeconds: 10
       {{- if .Values.affinity }}
       affinity:

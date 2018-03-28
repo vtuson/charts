@@ -3,7 +3,12 @@
 ##
 image: bitnami/rabbitmq:3.7.4-r1
 
-rabbit:
+
+## does your cluster have rbac enabled?
+rbacEnabled: true
+
+## section of specific values for rabbitmq
+rabbitmq:
   ## Specify a imagePullPolicy
   ## 'Always' if imageTag is 'latest', else set to 'IfNotPresent'
   ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
