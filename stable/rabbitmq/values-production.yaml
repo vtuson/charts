@@ -10,6 +10,12 @@ image:
   ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
   ##
   pullPolicy: IfNotPresent
+  
+  ## set to true if you would like to see extra information on logs
+  ## it turns BASH and NAMI debuggin in minideb
+  ## ref:  https://github.com/bitnami/minideb-extras/#turn-on-bash-debugging 
+  debug: false
+  
   ## Optionally specify an array of imagePullSecrets.
   ## Secrets must be manually created in the namespace.
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/

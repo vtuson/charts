@@ -5,6 +5,12 @@ image:
   registry: docker.io
   repository: bitnami/rabbitmq
   tag: 3.7.4-r1
+  
+  ## set to true if you would like to see extra information on logs
+  ## it turns BASH and NAMI debuggin in minideb
+  ## ref:  https://github.com/bitnami/minideb-extras/#turn-on-bash-debugging 
+  debug: false
+  
   ## Specify a imagePullPolicy
   ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
   ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
