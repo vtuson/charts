@@ -65,6 +65,10 @@ spec:
             #copy the mounted configuration to both places
             cp  /opt/bitnami/rabbitmq/conf/* /opt/bitnami/rabbitmq/etc/rabbitmq
             exec rabbitmq-server
+        {{- if .Values.resources }}
+        resources:
+{{ toYaml .Values.resources | indent 10 }}
+        {{- end }}
         volumeMounts:
           - name: config-volume
             mountPath: /opt/bitnami/rabbitmq/conf
