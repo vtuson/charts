@@ -89,6 +89,7 @@ replicas: 3
 ## Node labels and tolerations for pod assignment
 ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
 ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#taints-and-tolerations-beta-feature
-nodeSelector: {}
+nodeSelector: 
+  beta.kubernetes.io/arch: amd64
 tolerations: []
 affinity: {}
