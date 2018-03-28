@@ -4,8 +4,8 @@
 image: bitnami/rabbitmq:3.7.4-r1
 
 
-## does your cluster have rbac enabled? assume no by default
-rbacEnabled: false
+## does your cluster have rbac enabled?
+rbacEnabled: true
 
 ## section of specific values for rabbitmq
 rabbitmq:
@@ -55,7 +55,7 @@ rabbitmq:
 serviceType: ClusterIP
 
 persistence:
-  enabled: false
+  enabled: true
 
   ## A manually managed Persistent Volume and Claim
   ## Requires persistence.enabled: true
@@ -84,7 +84,7 @@ resources:
     cpu: 100m
 
 ## Replica count, set to 3 to provide a default available cluster
-replicas: 1
+replicas: 3
 
 ## Node labels and tolerations for pod assignment
 ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
